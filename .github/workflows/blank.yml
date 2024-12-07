@@ -1,0 +1,334 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+////Khai bĂ¡o lá»›p Node
+// Lá»›p Ä‘áº¡i diá»‡n cho má»™t nĂºt trong cĂ¢y
+class Node {
+public:
+    string value; // GiĂ¡ trá»‹ cá»§a nĂºt (toĂ¡n tá»­ hoáº·c toĂ¡n háº¡ng)
+    Node* left;   // Con trĂ¡i
+    Node* right;  // Con pháº£i
+
+    // Constructor
+    Node(string val) {
+        value = val;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+
+
+
+//// HĂ m khá»Ÿi táº¡o cĂ¢y
+class ExpressionTree {
+private:
+    Node* root; // Gá»‘c cá»§a cĂ¢y
+
+public:
+    // Constructor
+    ExpressionTree() {
+        root = nullptr;
+    }
+
+    // Kiá»ƒm tra cĂ¢y rá»—ng
+    bool isEmpty() {
+        return root == nullptr;
+    }
+
+    // ThĂªm má»™t pháº§n tá»­ vĂ o cĂ¢y (hĂ m táº¡o nĂºt má»›i)
+    Node* insert(string value, Node* left = nullptr, Node* right = nullptr) {
+        Node* newNode = new Node(value);
+        newNode->left = left;
+        newNode->right = right;
+        return newNode;
+    }
+
+    // Äáº·t gá»‘c cho cĂ¢y
+    void setRoot(Node* node) {
+        root = node;
+    }
+
+    // Duyá»‡t cĂ¢y theo trung tá»‘ (In-order)
+    void inorder(Node* node) {
+        if (node) {
+            if (node->left) cout << "("; // Má»Ÿ ngoáº·c
+            inorder(node->left);
+            cout << node->value << " ";
+            inorder(node->right);
+            if (node->right) cout << ")"; // ÄĂ³ng ngoáº·c
+        }
+    }
+
+    // Duyá»‡t cĂ¢y theo tiá»n tá»‘ (Pre-order)
+    void preorder(Node* node) {
+        if (node) {
+            cout << node->value << " ";
+            preorder(node->left);
+            preorder(node->right);
+        }
+    }
+
+    // Duyá»‡t cĂ¢y theo háº­u tá»‘ (Post-order)
+    void postorder(Node* node) {
+        if (node) {
+            postorder(node->left);
+            postorder(node->right);
+            cout << node->value << " ";
+        }
+    }
+
+    // Truy cáº­p gá»‘c cĂ¢y
+    Node* getRoot() {
+        return root;
+    }
+};
+
+
+
+
+/// XĂ¢y dá»±ng cĂ¢y biá»ƒu thá»©c 
+int main() {
+    ExpressionTree tree;
+
+    // Táº¡o cĂ¡c nĂºt tá»« dÆ°á»›i lĂªn
+    Node* sqrt_e = tree.insert("sqrt", nullptr, tree.insert("e"));
+    Node* h_minus_f = tree.insert("-", tree.insert("h"), tree.insert("f"));
+    Node* term3 = tree.insert("*", h_minus_f, sqrt_e);
+
+    Node* b_c6 = tree.insert("^", tree.insert("c"), tree.insert("6"));
+    Node* b_c6_div_d = tree.insert("/", tree.insert("*", tree.insert("b"), b_c6), tree.insert("d"));
+    Node* a_times_5 = tree.insert("*", tree.insert("a"), tree.insert("5"));
+
+    Node* term1_minus_term2 = tree.insert("-", a_times_5, b_c6_div_d);
+
+    // Gá»‘c cá»§a cĂ¢y lĂ  tá»•ng cá»§a term1_minus_term2 vĂ  term3
+    Node* root = tree.insert("+", term1_minus_term2, term3);
+    tree.setRoot(root);
+
+    // In káº¿t quáº£ theo cĂ¡c cĂ¡ch duyá»‡t
+    cout << "Trung tá»‘ (In-order): ";
+    tree.inorder(tree.getRoot());
+    cout << endl;
+
+    cout << "Tiá»n tá»‘ (Pre-order): ";
+    tree.preorder(tree.getRoot());
+    cout << endl;
+
+    cout << "Háº­u tá»‘ (Post-order): ";
+    tree.postorder(tree.getRoot());
+    cout << endl;
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+
+////Khai bĂ¡o lá»›p Node
+// Lá»›p Ä‘áº¡i diá»‡n cho má»™t nĂºt trong cĂ¢y
+class Node {
+public:
+    string value; // GiĂ¡ trá»‹ cá»§a nĂºt (toĂ¡n tá»­ hoáº·c toĂ¡n háº¡ng)
+    Node* left;   // Con trĂ¡i
+    Node* right;  // Con pháº£i
+
+    // Constructor
+    Node(string val) {
+        value = val;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+
+
+
+//// HĂ m khá»Ÿi táº¡o cĂ¢y
+class ExpressionTree {
+private:
+    Node* root; // Gá»‘c cá»§a cĂ¢y
+
+public:
+    // Constructor
+    ExpressionTree() {
+        root = nullptr;
+    }
+
+    // Kiá»ƒm tra cĂ¢y rá»—ng
+    bool isEmpty() {
+        return root == nullptr;
+    }
+
+    // ThĂªm má»™t pháº§n tá»­ vĂ o cĂ¢y (hĂ m táº¡o nĂºt má»›i)
+    Node* insert(string value, Node* left = nullptr, Node* right = nullptr) {
+        Node* newNode = new Node(value);
+        newNode->left = left;
+        newNode->right = right;
+        return newNode;
+    }
+
+    // Äáº·t gá»‘c cho cĂ¢y
+    void setRoot(Node* node) {
+        root = node;
+    }
+
+    // Duyá»‡t cĂ¢y theo trung tá»‘ (In-order)
+    void inorder(Node* node) {
+        if (node) {
+            if (node->left) cout << "("; // Má»Ÿ ngoáº·c
+            inorder(node->left);
+            cout << node->value << " ";
+            inorder(node->right);
+            if (node->right) cout << ")"; // ÄĂ³ng ngoáº·c
+        }
+    }
+
+    // Duyá»‡t cĂ¢y theo tiá»n tá»‘ (Pre-order)
+    void preorder(Node* node) {
+        if (node) {
+            cout << node->value << " ";
+            preorder(node->left);
+            preorder(node->right);
+        }
+    }
+
+    // Duyá»‡t cĂ¢y theo háº­u tá»‘ (Post-order)
+    void postorder(Node* node) {
+        if (node) {
+            postorder(node->left);
+            postorder(node->right);
+            cout << node->value << " ";
+        }
+    }
+
+    // Truy cáº­p gá»‘c cĂ¢y
+    Node* getRoot() {
+        return root;
+    }
+};
+
+
+
+
+/// XĂ¢y dá»±ng cĂ¢y biá»ƒu thá»©c 
+int main() {
+    ExpressionTree tree;
+
+    // Táº¡o cĂ¡c nĂºt tá»« dÆ°á»›i lĂªn
+    Node* sqrt_e = tree.insert("sqrt", nullptr, tree.insert("e"));
+    Node* h_minus_f = tree.insert("-", tree.insert("h"), tree.insert("f"));
+    Node* term3 = tree.insert("*", h_minus_f, sqrt_e);
+
+    Node* b_c6 = tree.insert("^", tree.insert("c"), tree.insert("6"));
+    Node* b_c6_div_d = tree.insert("/", tree.insert("*", tree.insert("b"), b_c6), tree.insert("d"));
+    Node* a_times_5 = tree.insert("*", tree.insert("a"), tree.insert("5"));
+
+    Node* term1_minus_term2 = tree.insert("-", a_times_5, b_c6_div_d);
+
+    // Gá»‘c cá»§a cĂ¢y lĂ  tá»•ng cá»§a term1_minus_term2 vĂ  term3
+    Node* root = tree.insert("+", term1_minus_term2, term3);
+    tree.setRoot(root);
+
+    // In káº¿t quáº£ theo cĂ¡c cĂ¡ch duyá»‡t
+    cout << "Trung tá»‘ (In-order): ";
+    tree.inorder(tree.getRoot());
+    cout << endl;
+
+    cout << "Tiá»n tá»‘ (Pre-order): ";
+    tree.preorder(tree.getRoot());
+    cout << endl;
+
+    cout << "Háº­u tá»‘ (Post-order): ";
+    tree.postorder(tree.getRoot());
+    cout << endl;
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
